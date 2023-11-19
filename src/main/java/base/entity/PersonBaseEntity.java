@@ -14,10 +14,11 @@ import java.util.Date;
 @ToString
 @Getter
 @Setter
+@MappedSuperclass
 public class PersonBaseEntity<ID extends Serializable> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private ID id;
     @NotNull
     private String firstName;
     @NotNull
@@ -32,7 +33,10 @@ public class PersonBaseEntity<ID extends Serializable> {
     private String email;
     @Max(value = 80,message = "Your age greater than our rules")
     @Min(value = 15,message = "Your age less than our rules")
+    private Integer age;
+    @Column(nullable = false,length = 20)
+    private String city;
 
-    @Column(length = 1,nullable = false)
+    @Column(nullable = false)
     private Character gender;
 }
