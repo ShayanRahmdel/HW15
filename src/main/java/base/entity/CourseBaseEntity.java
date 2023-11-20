@@ -1,12 +1,19 @@
 package base.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @MappedSuperclass
-public class CourseBaseEntity<ID extends Serializable> {
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class CourseBaseEntity<ID extends Serializable> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id;
