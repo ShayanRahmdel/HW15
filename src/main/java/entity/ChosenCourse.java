@@ -26,4 +26,15 @@ public class ChosenCourse extends CourseBaseEntity<Integer> {
 
 
     private Boolean isPassed;
+    @ManyToOne
+    private Course course;
+    @ManyToOne
+    private Student student;
+
+    public ChosenCourse(String name, Integer unit, Double score, Master master, Boolean isPassed) {
+        super(name, unit);
+        this.score = score;
+        this.master = master;
+        this.isPassed = isPassed;
+    }
 }
