@@ -38,7 +38,8 @@ public  abstract class PersonBaseEntityRepositoryImpl<T extends PersonBaseEntity
     @Override
     public void deleteById(ID id) {
         beginTransaction();
-        entityManager.remove(id);
+        T t = entityManager.find(getEntityClass(), id);
+        entityManager.remove(t);
         commitTransaction();
     }
 
