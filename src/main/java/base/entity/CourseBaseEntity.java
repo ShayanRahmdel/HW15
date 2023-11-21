@@ -24,5 +24,8 @@ public class CourseBaseEntity<ID extends Serializable> implements Serializable {
     @Max(value = 3,message = "We dont have greater than 3 unit")
     private Integer unit;
 
-
+    public CourseBaseEntity(String name, Integer unit) {
+        this.name = name;
+        this.unit = unit;
+    }
 }
