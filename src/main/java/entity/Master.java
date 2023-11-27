@@ -1,6 +1,5 @@
 package entity;
 
-import base.entity.PersonBaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,16 +24,24 @@ public class Master extends User {
 
     private Double salary= 1000000.0;
 
-    @OneToMany(mappedBy = "master",cascade = CascadeType.ALL)
-    private List<ChosenCourse> chosenCourses;
 
-    @OneToMany(mappedBy = "master",cascade = CascadeType.ALL)
-    private List<Term> terms;
+
 
     public Master(@NotNull String firstName, @NotNull String lastName, String userName, String password, Date dob, @Email String email, @Max(value = 80, message = "Your age greater than our rules") @Min(value = 15, message = "Your age less than our rules") Integer age, String city, Character gender, String masterNumber, MasterType masterType) {
         super(firstName, lastName, userName, password, dob, email, age, city, gender);
         this.masterNumber = masterNumber;
         this.masterType = masterType;
 
+    }
+    public Master(Integer id,@NotNull String firstName, @NotNull String lastName, String userName, String password, Date dob, @Email String email, @Max(value = 80, message = "Your age greater than our rules") @Min(value = 15, message = "Your age less than our rules") Integer age, String city, Character gender, String masterNumber, MasterType masterType) {
+        super(firstName, lastName, userName, password, dob, email, age, city, gender);
+        this.setId(id);
+        this.masterNumber = masterNumber;
+        this.masterType = masterType;
+
+    }
+
+    public Master(Integer id) {
+        this.setId(id);
     }
 }
