@@ -50,6 +50,14 @@ public class EditStudent {
         String studentNumber = giveStringInput();
         Student student = new Student(id,firstName,lastName,userName,password,date,email,age,city,gender,studentNumber);
 
+        validation(student);
+
+
+    }
+
+
+
+    private static void validation(Student student) {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         // Create a Validator
         Validator validator = validatorFactory.getValidator();
@@ -64,9 +72,8 @@ public class EditStudent {
                 System.out.println(violation.getPropertyPath() + ": " + violation.getMessage());
             }
         }
-
-
     }
+
     private Character giveCharacterInput() {
         String gender = input.next();
 
