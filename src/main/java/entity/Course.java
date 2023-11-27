@@ -1,32 +1,35 @@
 package entity;
 
-import base.entity.CourseBaseEntity;
-import lombok.*;
+import base.entity.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
-@Entity
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Course extends CourseBaseEntity<Integer> {
-    @Temporal(value = TemporalType.DATE)
-    private Date courseRelease;
-    @Column(length = 30)
-    private String explainCourse;
-    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
-    private List<ChosenCourse> ChosenCourse;
+@Getter
+@Setter
+@SuppressWarnings("unused")
+@Entity
+public class Course extends BaseEntity<Integer> {
 
+    @ManyToOne
+    private Lesson lesson;
 
-    public Course( String name, @Min(value = 1, message = "We dont have less than 1 unit") @Max(value = 3, message = "We dont have greater than 3 unit") Integer unit, Date courseRelease, String explainCourse) {
-        super( name, unit);
-        this.courseRelease = courseRelease;
-        this.explainCourse = explainCourse;
-    }
+    @ManyToOne
+    private Master master;
+
+    @OneToMany(mappedBy = "course")
+    private Set<ReportCard> reportCard;
+
+    @Embedded
+    private Term term;
+
+    @Column(name = "is_pass")
+    private Boolean isPass;
+
 }
