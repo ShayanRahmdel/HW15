@@ -1,7 +1,7 @@
 package repostory;
 
-import base.repository.PersonBaseEntityRepository;
+import base.repository.BaseEntityRepository;
 import entity.Master;
 
-public interface MasterRepository extends PersonBaseEntityRepository<Master,Integer> {
+public interface MasterRepository extends BaseEntityRepository<Master,Integer> {
 }
