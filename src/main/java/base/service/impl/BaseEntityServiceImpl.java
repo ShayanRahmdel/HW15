@@ -1,8 +1,8 @@
 package base.service.impl;
 
-import base.entity.PersonBaseEntity;
-import base.repository.PersonBaseEntityRepository;
-import base.service.PersonBaseService;
+import base.entity.BaseEntity;
+import base.repository.BaseEntityRepository;
+import base.service.BaseService;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class PersonBaseEntityServiceImpl <T extends PersonBaseEntity<ID> ,ID extends Serializable,
-        R extends PersonBaseEntityRepository<T,ID>> implements PersonBaseService<T,ID> {
+public class BaseEntityServiceImpl<T extends BaseEntity<ID>,ID extends Serializable,
+        R extends BaseEntityRepository<T,ID>> implements BaseService<T,ID> {
 
    protected final R repository;
 

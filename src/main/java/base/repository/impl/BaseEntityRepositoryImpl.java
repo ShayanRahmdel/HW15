@@ -1,16 +1,15 @@
 package base.repository.impl;
 
-import base.entity.PersonBaseEntity;
-import base.repository.PersonBaseEntityRepository;
+import base.entity.BaseEntity;
+import base.repository.BaseEntityRepository;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
-public  abstract class PersonBaseEntityRepositoryImpl<T extends PersonBaseEntity<ID>,ID extends Serializable>
-        implements PersonBaseEntityRepository<T,ID> {
+public  abstract class BaseEntityRepositoryImpl<T extends BaseEntity<ID>,ID extends Serializable>
+        implements BaseEntityRepository<T,ID> {
     protected EntityManager entityManager;
 
     @Override

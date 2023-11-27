@@ -1,14 +1,13 @@
 package base.repository;
 
-import base.entity.PersonBaseEntity;
+import base.entity.BaseEntity;
 
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
-public interface PersonBaseEntityRepository <T extends PersonBaseEntity<ID>, ID extends Serializable>{
+public interface BaseEntityRepository<T extends BaseEntity<ID>, ID extends Serializable>{
 
         T saveOrUpdate(T entity);
 
@@ -23,6 +22,7 @@ public interface PersonBaseEntityRepository <T extends PersonBaseEntity<ID>, ID 
         void commitTransaction();
 
         void rollBack();
+
 
 
 }
