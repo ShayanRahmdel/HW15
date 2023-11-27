@@ -1,8 +1,7 @@
 package util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import entity.Employee;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,7 +10,17 @@ public class EmployeeMenu {
     SignUpStudent student = new SignUpStudent();
     EditStudent editStudent = new EditStudent();
 
-    public void mainMenu() {
+    SignUpMaster signUpMaster = new SignUpMaster();
+
+    EditMaster editMaster = new EditMaster();
+
+    SignUpEmployee signUpEmployee = new SignUpEmployee();
+
+    EditEmployee employee = new EditEmployee();
+
+    CourseMenu courseMenu = new CourseMenu();
+
+    public void mainMenu(Employee employee) {
         Boolean flag = true;
         Integer select = 0;
         while (flag) {
@@ -24,10 +33,10 @@ public class EmployeeMenu {
             select = giveIntegerInput();
             switch (select) {
                 case 1 -> studentMenu();
-                case 2 -> System.out.println(2); //masterMenu();
-                case 3 -> System.out.println(3);//employeeMenu();
-                case 4 -> System.out.println(4);//courseMenu();
-                case 5 -> System.out.println(5);//showSalary();
+                case 2 -> masterMenu();
+                case 3 -> employeeMenu();
+                case 4 -> courseMenu.courseMenu();//courseMenu();
+                case 5 -> showEmployeeDetail(employee);//showSalary();
                 case 6 -> flag = false;
                 default -> System.out.println("wrong");
             }
@@ -76,5 +85,48 @@ public class EmployeeMenu {
     }
 
 
+    private void masterMenu(){
+        Boolean flag = true;
+        Integer select = 0;
+        while (flag) {
+            System.out.println("1_Add Master");
+            System.out.println("2_Delete Master");
+            System.out.println("3_Edit Master");
+            System.out.println("4_Exit");
+            select = giveIntegerInput();
+            switch (select) {
+                case 1 -> signUpMaster.signUp();
+                case 2 -> editMaster.delete();
+                case 3 -> editMaster.edit();
+                case 4 -> flag = false;
+                default -> System.out.println("wrong");
+
+            }
+        }
+    }
+    private void employeeMenu(){
+        Boolean flag = true;
+        Integer select = 0;
+        while (flag) {
+            System.out.println("1_Add Employee");
+            System.out.println("2_Delete Employee");
+            System.out.println("3_Edit Employee");
+            System.out.println("4_Exit");
+            select = giveIntegerInput();
+            switch (select) {
+                case 1 -> signUpEmployee.signUp();
+                case 2 -> employee.delete();
+                case 3 -> employee.edit();
+                case 4 -> flag = false;
+                default -> System.out.println("wrong");
+
+            }
+        }
+
+    }
+
+    private void showEmployeeDetail(Employee employee){
+        System.out.println(AppContext.getEmployeeService().findById(employee.getId()));
+    }
 
 }
