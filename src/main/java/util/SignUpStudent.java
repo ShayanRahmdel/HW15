@@ -47,6 +47,11 @@ public class SignUpStudent {
         String studentNumber = giveStringInput();
         Student student = new Student(firstName,lastName,userName,password,date,email,age,city,gender,studentNumber);
 
+        Validaion(student);
+
+    }
+
+    private void Validaion (Student  student) {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         // Create a Validator
         Validator validator = validatorFactory.getValidator();
@@ -61,10 +66,11 @@ public class SignUpStudent {
                 System.out.println(violation.getPropertyPath() + ": " + violation.getMessage());
             }
         }
-
     }
 
-    private Character giveCharacterInput() {
+
+
+    private  Character giveCharacterInput() {
         String gender = input.next();
 
         if (gender.length() == 1) {
@@ -79,7 +85,7 @@ public class SignUpStudent {
     }
 
 
-    private String giveStringInput() {
+    private  String giveStringInput() {
         String i;
         while (true) {
             try {
@@ -92,7 +98,7 @@ public class SignUpStudent {
             }
         }
     }
-    private Double giveDoubleInput() {
+    private  Double giveDoubleInput() {
         Double i;
         while (true) {
             try {
@@ -106,7 +112,7 @@ public class SignUpStudent {
         }
     }
 
-    private Integer giveIntegerInput() {
+    private  Integer giveIntegerInput() {
         int i;
         while (true) {
             try {
