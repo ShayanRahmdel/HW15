@@ -1,35 +1,26 @@
 package entity;
 
-import base.entity.PersonBaseEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-@Entity
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Term extends PersonBaseEntity<Integer> {
+@Embeddable
+public class Term {
 
+    private Integer year;
 
-    @Max(value = 24,message = "Your units greater than 24")
-    @Min(value = 20,message = "Your unit Less than 20")
-    private int totalUnit;
-
-    @Max(value = 20,message = "GPA cant greater than 20")
-    @Min(value = 5,message = "GPA cant less than 5")
-    private Double gpa;
-
-    @ManyToOne
-    private Master master;
-    @ManyToOne
-    private Student student;
-
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "mid_term")
+    private MidTerm midTerm;
 
 }
