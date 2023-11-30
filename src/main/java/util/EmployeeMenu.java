@@ -18,6 +18,8 @@ public class EmployeeMenu {
 
     EditEmployee employee = new EditEmployee();
 
+    LessonMenu lessonMenu = new LessonMenu();
+
     CourseMenu courseMenu = new CourseMenu();
 
     public void mainMenu(Employee employee) {
@@ -27,35 +29,62 @@ public class EmployeeMenu {
             System.out.println("1_Student Menu");
             System.out.println("2_Master Menu");
             System.out.println("3_Employee Menu");
-            System.out.println("4_Course Menu");
-            System.out.println("5_Show Your Salary");
-            System.out.println("6_Exit");
-            select = giveIntegerInput();
+            System.out.println("4_Lesson Menu");
+            System.out.println("5_Course Menu");
+            System.out.println("6_Show Your Salary");
+            System.out.println("7_Exit");
+            select = GiveInput.giveIntegerInput();
             switch (select) {
                 case 1 -> studentMenu();
                 case 2 -> masterMenu();
                 case 3 -> employeeMenu();
-                case 4 -> courseMenu.courseMenu();//courseMenu();
-                case 5 -> showEmployeeDetail(employee);//showSalary();
-                case 6 -> flag = false;
+                case 4 -> lessonMenu.Menu();//courseMenu();
+                case 5 -> courseMenu();
+                case 6 -> showEmployeeDetail(employee);//showSalary();
+                case 7 -> flag = false;
                 default -> System.out.println("wrong");
             }
         }
     }
 
-    private Integer giveIntegerInput() {
-        int i;
-        while (true) {
-            try {
-                i = input.nextInt();
-                input.nextLine();
-                return i;
-            } catch (InputMismatchException e) {
-                input.nextLine();
-                System.out.println("Enter just number Please");
+    private void courseMenu() {
+        Boolean flag = true;
+        Integer select = 0;
+        while (flag) {
+            System.out.println("1_Add Course");
+            System.out.println("2_Delete Course");
+            System.out.println("3_Edit Course");
+            System.out.println("4_Exit");
+            select = GiveInput.giveIntegerInput();
+            switch (select) {
+                case 1 -> {
+                    try {
+                        courseMenu.addCourse();
+                    }catch (Exception e){
+                        System.out.println("somthing wrong");
+                    }
+                }
+                case 2 -> {
+                    try {
+                        courseMenu.editCourse();
+                    }catch (Exception e){
+                        System.out.println("something wrong");
+                    }
+                }
+                case 3 -> {
+                    try {
+                        courseMenu.deleteCourse();
+                    }catch (Exception e){
+                        System.out.println("something wrong");
+                    }
+                }
+                case 4 -> flag = false;
+                default -> System.out.println("wrong");
             }
         }
     }
+
+
 
     private void studentMenu() {
         Boolean flag = true;
@@ -65,11 +94,29 @@ public class EmployeeMenu {
             System.out.println("2_Delete Student");
             System.out.println("3_Edit Student");
             System.out.println("4_Exit");
-            select = giveIntegerInput();
+            select = GiveInput.giveIntegerInput();
             switch (select) {
-                case 1 -> student.addStudent();
-                case 2 -> deleteStudent();
-                case 3 -> editStudent.edit();
+                case 1 -> {
+                    try {
+                        student.addStudent();
+                    }catch (Exception e){
+                        System.out.println("something Wrong");
+                    }
+                }
+                case 2 -> {
+                    try {
+                        deleteStudent();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("not fount this id");
+                    }
+                }
+                case 3 -> {
+                    try {
+                        editStudent.edit();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("Something wrong");
+                    }
+                }
                 case 4 -> flag = false;
                 default -> System.out.println("wrong");
 
@@ -78,14 +125,14 @@ public class EmployeeMenu {
     }
 
 
-    private void deleteStudent(){
+    private void deleteStudent() {
         System.out.println("Enter student ID:");
-        Integer id = giveIntegerInput();
+        Integer id = GiveInput.giveIntegerInput();
         AppContext.getStudentService().deleteById(id);
     }
 
 
-    private void masterMenu(){
+    private void masterMenu() {
         Boolean flag = true;
         Integer select = 0;
         while (flag) {
@@ -93,18 +140,37 @@ public class EmployeeMenu {
             System.out.println("2_Delete Master");
             System.out.println("3_Edit Master");
             System.out.println("4_Exit");
-            select = giveIntegerInput();
+            select = GiveInput.giveIntegerInput();
             switch (select) {
-                case 1 -> signUpMaster.signUp();
-                case 2 -> editMaster.delete();
-                case 3 -> editMaster.edit();
+                case 1 -> {
+                    try {
+                        signUpMaster.signUp();
+                    }catch (Exception e){
+                        System.out.println("something wrong");
+                    }
+                }
+                case 2 -> {
+                    try {
+                        editMaster.delete();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("not found id");
+                    }
+                }
+                case 3 -> {
+                    try {
+                        editMaster.edit();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("spmething wrong");
+                    }
+                }
                 case 4 -> flag = false;
                 default -> System.out.println("wrong");
 
             }
         }
     }
-    private void employeeMenu(){
+
+    private void employeeMenu() {
         Boolean flag = true;
         Integer select = 0;
         while (flag) {
@@ -112,11 +178,29 @@ public class EmployeeMenu {
             System.out.println("2_Delete Employee");
             System.out.println("3_Edit Employee");
             System.out.println("4_Exit");
-            select = giveIntegerInput();
+            select = GiveInput.giveIntegerInput();
             switch (select) {
-                case 1 -> signUpEmployee.signUp();
-                case 2 -> employee.delete();
-                case 3 -> employee.edit();
+                case 1 -> {
+                    try {
+                        signUpEmployee.signUp();
+                    }catch (Exception e){
+                        System.out.println("something wrong");
+                    }
+                }
+                case 2 -> {
+                    try {
+                        employee.delete();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("wrong Id");
+                    }
+                }
+                case 3 -> {
+                    try {
+                        employee.edit();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("something wrong");
+                    }
+                }
                 case 4 -> flag = false;
                 default -> System.out.println("wrong");
 
@@ -125,7 +209,7 @@ public class EmployeeMenu {
 
     }
 
-    private void showEmployeeDetail(Employee employee){
+    private void showEmployeeDetail(Employee employee) {
         System.out.println(AppContext.getEmployeeService().findById(employee.getId()));
     }
 

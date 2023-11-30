@@ -1,6 +1,7 @@
 package util;
 
-import entity.Student;
+import entity.Master;
+import entity.MasterType;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -13,7 +14,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
 
-public class EditStudent {
+public class EditMaster {
 
 
     public void edit() {
@@ -45,28 +46,38 @@ public class EditStudent {
         String city = GiveInput.giveStringInput();
         System.out.println("Enter Gender:");
         Character gender = GiveInput.giveCharacterInput();
-        System.out.println("Enter StudentNumber:");
-        String studentNumber = GiveInput.giveStringInput();
-        Student student = new Student(id, firstName, lastName, userName, password, date, email, age, city, gender, studentNumber);
+        System.out.println("Enter Master Number:");
+        String masterNumber = GiveInput.giveStringInput();
+        System.out.print(" Tuition,FacultyMember:");
+        String type = GiveInput.giveStringInput();
+        MasterType masterType = null;
+        try {
+            masterType = MasterType.valueOf(type);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid rank entered. Please try again.");
 
-        validation(student);
-
-
+        }
+        Master master = new Master(id, firstName, lastName, userName, password, date, email, age, city, gender, masterNumber, masterType);
+        validation(master);
     }
 
+    public void delete() {
+        System.out.println("Enter Id want to Delete");
+        Integer id = GiveInput.giveIntegerInput();
+        AppContext.getMasterService().deleteById(id);
+    }
 
-    private static void validation(Student student) {
+    private static void validation(Master master) {
 
-        Set<ConstraintViolation<Student>> violations = Hibervalidation.validator.validate(student);
+        Set<ConstraintViolation<Master>> violations = Hibervalidation.validator.validate(master);
         if (violations.isEmpty()) {
-            AppContext.getStudentService().saveOrUpdate(student);
-            System.out.println(student);
+            AppContext.getMasterService().saveOrUpdate(master);
+            System.out.println(master);
         } else {
-            for (ConstraintViolation<Student> violation : violations) {
+            for (ConstraintViolation<Master> violation : violations) {
                 System.out.println(violation.getPropertyPath() + ": " + violation.getMessage());
             }
         }
     }
-
 
 }

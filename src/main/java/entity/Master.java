@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 public class Master extends User {
     @Column(unique = true,length = 6,nullable = false)
     private String masterNumber;
@@ -43,5 +43,17 @@ public class Master extends User {
 
     public Master(Integer id) {
         this.setId(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Master Detail: " +"\n"+
+                "Master number: "+ getMasterNumber()+"\n"+
+                "FirstName: "+getFirstName()+"\n"+
+                "LastName: "+getLastName()+"\n"+
+                "Age:  "+getAge()+"\n"+
+                "masterNumber:  " + masterNumber + "\n" +
+                "masterType:  " + masterType + "\n"+
+                "==========================="+"\n";
     }
 }

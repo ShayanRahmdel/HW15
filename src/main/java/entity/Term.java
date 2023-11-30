@@ -23,4 +23,19 @@ public class Term {
     @Column(name = "mid_term")
     private MidTerm midTerm;
 
+    public Term getPervTerm() {
+        MidTerm pervMidTerm;
+        if (midTerm.equals(MidTerm.Second)){
+            pervMidTerm=MidTerm.First;
+        }else {
+            pervMidTerm = MidTerm.Second;
+        }
+        Integer pervYear = year;
+
+        if (pervMidTerm==MidTerm.Second){
+            pervYear-=1;
+        }
+        return new Term(pervYear,pervMidTerm);
+
+    }
 }

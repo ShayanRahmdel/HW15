@@ -1,20 +1,27 @@
 package repostory;
 
-import java.util.Optional;
+import base.repository.BaseEntityRepository;
+import entity.*;
 
-public interface ReportCardRepository {
-    ReportCard saveOrUpdate(ReportCard reportCard);
+import java.util.List;
 
-    Optional<ReportCard> findById(Integer id);
+public interface ReportCardRepository extends BaseEntityRepository<ReportCard,Integer> {
 
-    void deleteById(Integer id);
+     Double getAvg(Student student, Term pervTerm);
+
+     Double findMarkByID(Integer courseID,Integer studentId);
 
 
-    void beginTransaction();
+     Long getSumOfUnitsInCurrentTerm(Student student);
 
-    void commitTransaction();
+     List<ReportCard> findByStudent(Student student);
 
-    void rollBack();
+     List<Course> findCourseByStudent(Student student);
+     List<Course> findCourseByStudentAndTeacher(Student student, Master master);
+
+     ReportCard findStudentToMark(Integer studentId,Integer courseId,Integer masterId);
+
+
 
 
 }

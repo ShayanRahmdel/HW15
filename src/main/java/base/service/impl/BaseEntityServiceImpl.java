@@ -36,6 +36,11 @@ public class BaseEntityServiceImpl<T extends BaseEntity<ID>,ID extends Serializa
     }
 
     @Override
+    public boolean existsById(ID id) {
+        return repository.existsById(id);
+    }
+
+    @Override
     public void beginTransaction() {
             repository.beginTransaction();
     }

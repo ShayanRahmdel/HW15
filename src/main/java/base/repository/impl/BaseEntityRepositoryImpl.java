@@ -4,6 +4,7 @@ import base.entity.BaseEntity;
 import base.repository.BaseEntityRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Optional;
@@ -46,6 +47,15 @@ public  abstract class BaseEntityRepositoryImpl<T extends BaseEntity<ID>,ID exte
     public Collection<T> findAll() {
         return entityManager.createQuery(
                 "from " + getEntityClass().getSimpleName(), getEntityClass()).getResultList();
+    }
+
+    @Override
+    public boolean existsById(ID id) {
+        TypedQuery<Long> query = entityManager.createQuery(
+                "select count(t) from " + getEntityClass().getSimpleName() + " t where t.id = :id", Long.class
+        );
+        query.setParameter("id", id);
+        return query.getSingleResult() > 0;
     }
 
     @Override

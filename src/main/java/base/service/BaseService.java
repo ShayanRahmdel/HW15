@@ -15,6 +15,7 @@ public interface BaseService<T extends BaseEntity<ID>,ID extends Serializable>{
     void deleteById(ID id);
 
     Collection<T> findAll();
+    boolean existsById(ID id);
 
     void beginTransaction();
 

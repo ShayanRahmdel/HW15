@@ -16,6 +16,7 @@ public interface BaseEntityRepository<T extends BaseEntity<ID>, ID extends Seria
         void deleteById(ID id);
 
         Collection<T> findAll();
+        boolean existsById(ID id);
 
         void beginTransaction();
 

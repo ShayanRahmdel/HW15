@@ -1,6 +1,6 @@
 package entity;
 
-import base.entity.PersonBaseEntity;
+import base.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User extends PersonBaseEntity<Integer> {
+public class User extends BaseEntity<Integer> {
     @NotNull
     private String firstName;
     @NotNull
@@ -37,4 +37,11 @@ public class User extends PersonBaseEntity<Integer> {
 
     @Column(nullable = false)
     private Character gender;
+
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+
 }

@@ -1,6 +1,6 @@
 package util;
 
-import entity.Student;
+import entity.Employee;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -13,7 +13,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
 
-public class EditStudent {
+public class EditEmployee {
 
 
     public void edit() {
@@ -45,28 +45,30 @@ public class EditStudent {
         String city = GiveInput.giveStringInput();
         System.out.println("Enter Gender:");
         Character gender = GiveInput.giveCharacterInput();
-        System.out.println("Enter StudentNumber:");
-        String studentNumber = GiveInput.giveStringInput();
-        Student student = new Student(id, firstName, lastName, userName, password, date, email, age, city, gender, studentNumber);
-
-        validation(student);
-
-
+        System.out.println("Enter Employee tNumber:");
+        String employeeNumber = GiveInput.giveStringInput();
+        Employee employee = new Employee(id, firstName, lastName, userName, password, date, email, age, city, gender, employeeNumber);
+        validation(employee);
     }
 
 
-    private static void validation(Student student) {
+    private static void validation(Employee employee) {
 
-        Set<ConstraintViolation<Student>> violations = Hibervalidation.validator.validate(student);
+        Set<ConstraintViolation<Employee>> violations = Hibervalidation.validator.validate(employee);
         if (violations.isEmpty()) {
-            AppContext.getStudentService().saveOrUpdate(student);
-            System.out.println(student);
+            AppContext.getEmployeeService().saveOrUpdate(employee);
+            System.out.println(employee);
         } else {
-            for (ConstraintViolation<Student> violation : violations) {
+            for (ConstraintViolation<Employee> violation : violations) {
                 System.out.println(violation.getPropertyPath() + ": " + violation.getMessage());
             }
         }
     }
 
+    public void delete() {
+        System.out.println("Enter Id want to Delete");
+        Integer id = GiveInput.giveIntegerInput();
+        AppContext.getEmployeeService().deleteById(id);
+    }
 
 }

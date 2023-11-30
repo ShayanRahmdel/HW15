@@ -1,12 +1,10 @@
 package entity;
 
 import base.entity.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -17,19 +15,48 @@ import java.util.Set;
 @Entity
 public class Course extends BaseEntity<Integer> {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Lesson lesson;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Master master;
 
     @OneToMany(mappedBy = "course")
+    @ToString.Exclude
     private Set<ReportCard> reportCard;
 
     @Embedded
     private Term term;
 
-    @Column(name = "is_pass")
-    private Boolean isPass;
 
+
+
+
+    public Course(Lesson lesson, Master master, Term term) {
+        this.lesson = lesson;
+        this.master = master;
+        this.term = term;
+    }
+
+    public Course(Integer integer) {
+        super(integer);
+    }
+
+    public Course(Integer integer, Lesson lesson, Master master, Term term) {
+        super(integer);
+        this.lesson = lesson;
+        this.master = master;
+        this.term = term;
+    }
+
+    @Override
+    public String toString() {
+        return "Course List: " +"\n"+
+                "Course ID==> "+ getId()+"\n"+
+                "year =======> " + term.getYear().toString() +"\n"+
+                "midTerm ====> " +term.getMidTerm().toString()+"\n"+
+                "=========================="+"\n";
+    }
 }
